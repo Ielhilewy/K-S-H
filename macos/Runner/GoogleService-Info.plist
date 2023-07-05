@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDuQxZ_1xJlQuLOda7z4n5Zqyyp19gRLpw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>142588167260</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ksh</string>
+	<key>PROJECT_ID</key>
+	<string>ksh-a6736</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ksh-a6736.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:142588167260:ios:9a9cd80ba58342c10e1299</string>
+</dict>
+</plist>

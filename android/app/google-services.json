@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142588167260",
+    "project_id": "ksh-a6736",
+    "storage_bucket": "ksh-a6736.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142588167260:android:c94ea24179b3346e0e1299",
+        "android_client_info": {
+          "package_name": "com.example.ksh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4SlpS1edGi7GTcutV0RcKJD24yW1-JcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

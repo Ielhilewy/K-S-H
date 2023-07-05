@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+class CustomTf extends StatelessWidget {
+  final TextEditingController controller;
+  final String labelText;
+  final bool obscureText;
+  final String? Function(String?)? validator;
+
+  const CustomTf({
+    required this.controller,
+    required this.labelText,
+    this.obscureText = false,
+    this.validator,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 260,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          labelText: labelText,
+          contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16, vertical: 12),
+        ),
+        validator: validator,
+      ),
+    );
+  }
+}
