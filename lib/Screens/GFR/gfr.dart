@@ -1,10 +1,13 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ksh/globals.dart';
 import 'package:ksh/Screens/GFR/table.dart';
 
 import '../../Customs/Custom_BMI_textfield.dart';
+import '../../models/user_data_model.dart';
 
 class GFR extends StatefulWidget {
   const GFR({Key? key}) : super(key: key);
@@ -288,6 +291,9 @@ class GFRState extends State<GFR> {
                                       if (formKey.currentState!.validate()) {
                                         formKey.currentState!.save();
                                         await calculateGFR();
+
+                                        addDocument(gfr);
+                                        getAllData();
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -324,7 +330,44 @@ class GFRState extends State<GFR> {
     );
   }
 }
+void addDocument(double gfr){
 
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String? email = auth.currentUser!.email;
+  print("email $email");
+
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference users =  firestore.collection('users');
+  users.add({
+    'email': email!,
+    'dangerous': gfr,
+  }).then((DocumentReference document) {
+    print('Document added with ID: ${document.id}');
+  }).catchError((error) {
+    print('Error adding document: $error');
+  });
+
+}
+Future<List<peoplesData>> getAllData() async {
+  // Reference to the Firestore collection
+  CollectionReference collection = FirebaseFirestore.instance.collection('users');
+  QuerySnapshot snapshot = await collection.get();
+
+  // Extract the data from each document in the snapshot
+  List<peoplesData> dataList = [];
+  snapshot.docs.forEach((doc) {
+    var data = doc.data();
+    peoplesData model = peoplesData.fromJson(data);
+    dataList.add(model);
+  });
+
+  for (peoplesData pepole in dataList){
+    print("email is ${pepole.email} , dangerus is ${pepole.dangerous}");
+  }
+
+  return dataList;
+}
 Future<void> calculateGFR() async {
   if (creatinine != null && Weight != null && Age != null) {
     double creatinineValue = double.parse(creatinine!);

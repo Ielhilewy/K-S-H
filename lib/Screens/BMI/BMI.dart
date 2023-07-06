@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:ksh/Screens/BMI/bmi_result.dart';
@@ -273,11 +275,13 @@ class BMIState extends State<BMI> {
                                   ),
                                   CustomBButton(
                                     text: "CALCULATE",
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
                                         double bmi = _weight / pow(_height / 100, 2);
                                         int result = _calculateBMIResult(bmi);
+
+
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
