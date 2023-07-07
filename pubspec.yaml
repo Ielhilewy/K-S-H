@@ -75,6 +75,7 @@ flutter:
      - assets/images/checkup.jpeg
      - assets/images/login.jpeg
      - assets/images/signup.jpeg
+     - assets/images/booking.jpg
      - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

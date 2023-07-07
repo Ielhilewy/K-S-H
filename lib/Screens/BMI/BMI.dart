@@ -1,11 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:ksh/Screens/BMI/bmi_result.dart';
-
 import '../../Customs/Custom_BMI_button.dart';
 import '../../Customs/Custom_BMI_textfield.dart';
 
@@ -13,14 +9,12 @@ class BMI extends StatefulWidget {
   @override
   State<BMI> createState() => BMIState();
 }
-
 class BMIState extends State<BMI> {
   final _formKey = GlobalKey<FormState>();
   bool _isMale = true;
   double _weight = 40;
   int _age = 20;
   double _height = 120;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -311,7 +305,6 @@ class BMIState extends State<BMI> {
       ),
     );
   }
-
   int _calculateBMIResult(double bmi) {
     if (bmi < 18.5) {
       return 0; // Underweight

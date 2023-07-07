@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ksh/Screens/GFR/Booking.dart';
 import 'package:ksh/globals.dart';
 import 'package:ksh/Screens/HOME/home.dart';
 import 'package:ksh/Screens/GFR/gfr.dart';
@@ -147,8 +148,12 @@ class TableActivityState extends State<TableActivity> {
       width: 200,
       child: ElevatedButton(
         onPressed: () {
-          // code to handle button press
-          // ...
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Booking(),
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

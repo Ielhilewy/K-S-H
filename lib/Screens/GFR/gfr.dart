@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ksh/globals.dart';
 import 'package:ksh/Screens/GFR/table.dart';
-
 import '../../Customs/Custom_BMI_textfield.dart';
 import '../../models/user_data_model.dart';
 
@@ -335,8 +334,6 @@ void addDocument(double gfr){
   FirebaseAuth auth = FirebaseAuth.instance;
   String? email = auth.currentUser!.email;
   print("email $email");
-
-
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference users =  firestore.collection('users');
   users.add({
@@ -347,13 +344,11 @@ void addDocument(double gfr){
   }).catchError((error) {
     print('Error adding document: $error');
   });
-
 }
 Future<List<peoplesData>> getAllData() async {
   // Reference to the Firestore collection
   CollectionReference collection = FirebaseFirestore.instance.collection('users');
   QuerySnapshot snapshot = await collection.get();
-
   // Extract the data from each document in the snapshot
   List<peoplesData> dataList = [];
   snapshot.docs.forEach((doc) {
