@@ -183,14 +183,14 @@ class _homeState extends State<home> {
                                           height: 15.0,
                                         ),
                                         Image.asset(
-                                          'assets/images/check.jpeg',
+                                          'assets/images/checkup.png',
                                           width: 120,
                                           height: 100,
                                         ),
                                       ],
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.grey[300],
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
@@ -236,7 +236,7 @@ class _homeState extends State<home> {
                                       ],
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.grey[300],
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
@@ -290,7 +290,7 @@ class _homeState extends State<home> {
                                       ],
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.grey[300],
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
@@ -329,14 +329,14 @@ class _homeState extends State<home> {
                                           height: 15.0,
                                         ),
                                         Image.asset(
-                                          'assets/images/advice.jpeg',
+                                          'assets/images/Advice.png',
                                           width: 120,
                                           height: 100,
                                         ),
                                       ],
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.grey[300],
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
@@ -387,7 +387,7 @@ class _homeState extends State<home> {
                                       ],
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.grey[300],
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),

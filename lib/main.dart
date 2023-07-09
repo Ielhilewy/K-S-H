@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'Screens/GFR/Booking.dart';
 import 'Screens/LOGIN/forget passward.dart';
+import 'Screens/LOGIN/splash.dart';
 import 'Screens/update_email.dart';
 import 'firebase_options.dart';
 import 'Screens/HOME/home.dart';
@@ -22,7 +23,7 @@ class myapp extends StatelessWidget
   {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen ()  ,
+      home: SplashPage ()  ,
     );
   }
 }

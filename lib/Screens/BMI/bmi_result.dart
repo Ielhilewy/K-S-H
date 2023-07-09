@@ -119,34 +119,35 @@ class bmi_result extends StatelessWidget {
                       height: 70,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 88,
-                        ),
-                        SizedBox(
-                          height: 60,
-                          width: 200,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.blue,
-                            ),
-                            child: MaterialButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => home(),
+
+                        Center(
+                          child: SizedBox(
+                            height: 60,
+                            width: 200,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.blue,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => home(),
+                                    ),
+                                  );
+                                },
+                                height: 50.0,
+                                child: Text(
+                                  "DONE",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                );
-                              },
-                              height: 50.0,
-                              child: Text(
-                                "DONE",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
