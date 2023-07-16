@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // Add a delay to simulate a splash screen
-    Timer(const Duration(seconds: 10), () {
+    Timer(const Duration(seconds: 5), () {
       // Navigate to the home page after the splash screen
       Navigator.pushReplacement(
         context,

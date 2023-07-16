@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:ksh/Screens/HOME/home.dart';
 
-class bmi_result extends StatelessWidget {
-  final int result;
+class BmiResult extends StatelessWidget {
+  final String? result;
   final bool isMale;
   final int age;
 
-  bmi_result({
+  BmiResult({
     required this.result,
     required this.age,
     required this.isMale,
@@ -98,12 +98,13 @@ class bmi_result extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "Result: $result",
+                              "BMI: $result",
                               style: TextStyle(
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+
                             Text(
                               "Age: $age",
                               style: TextStyle(
@@ -121,7 +122,6 @@ class bmi_result extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
                         Center(
                           child: SizedBox(
                             height: 60,

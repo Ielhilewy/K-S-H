@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:ksh/Screens/HOME/home.dart';
 
-import 'checkup.dart';
+class CheckResult extends StatelessWidget {
+  final dynamic result;
 
-class Check_result extends StatelessWidget {
-
+  const CheckResult({required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +39,11 @@ class Check_result extends StatelessWidget {
                             },
                             color: Colors.blue[800],
                           ),
-
                         ],
                       ),
                       SizedBox(
                         height: 180,
                       ),
-
-
                       Container(
                         height: 200,
                         width: 400,
@@ -57,51 +54,45 @@ class Check_result extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Column(
                           children: [
-                                 SizedBox(
-                                  height: 30,
-                                  width: 20,
-                                ),
-                                Container(
-
-                                  child: Column(
+                            SizedBox(
+                              height: 30,
+                              width: 20,
+                            ),
+                            Container(
+                              child: Column(
+                                children: [
+                                  Row(
                                     children: [
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width:10,
-                                              ),
-                                              Text(
-                                                "Result: ",
-                                                style: TextStyle(
-                                                  fontSize: 40,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "${result != null && result!.isNotEmpty ? result![0]['label'] : "empty"}",
-                                                style: TextStyle(
-                                                  fontSize: 35,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Result: ",
+                                        style: TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                )
-
-
-
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "${result != null && result.isNotEmpty ? result[0]['label'] : 'empty'}",
+                                        style: TextStyle(
+                                          fontSize: 35,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -110,41 +101,40 @@ class Check_result extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                      Center(
-                        child: SizedBox(
-                          height: 60,
-                          width: 200,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.blue,
-                            ),
-                            child: MaterialButton(
-                              onPressed: (){
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context)=>home()
-                                    )
-                                );
-                              },
-                              height: 50.0,
-                              child: Text(
-                                "Confirm",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        height: 60,
+                        width: 200,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.blue,
+                          ),
+                          child: MaterialButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => home(),
                                 ),
+                              );
+                            },
+                            height: 50.0,
+                            child: Text(
+                              "Confirm",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                      )
-                    ]
-                )
+                      ),
+                    ),
+                  ],
+                ),
               ],
             )
           ],

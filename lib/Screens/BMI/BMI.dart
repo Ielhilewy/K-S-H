@@ -9,12 +9,14 @@ class BMI extends StatefulWidget {
   @override
   State<BMI> createState() => BMIState();
 }
+
 class BMIState extends State<BMI> {
   final _formKey = GlobalKey<FormState>();
   bool _isMale = true;
   double _weight = 40;
   int _age = 20;
   double _height = 120;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +50,6 @@ class BMIState extends State<BMI> {
                                     },
                                     color: Color(0xff205072),
                                   ),
-
                                   Expanded(
                                     child: Center(
                                       child: Text(
@@ -106,11 +107,9 @@ class BMIState extends State<BMI> {
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(15),
+                                          borderRadius: BorderRadius.circular(15),
                                         ),
-                                        primary:
-                                        _isMale ? Colors.blue : Colors.grey[300],
+                                        primary: _isMale ? Colors.blue : Colors.grey[300],
                                       ),
                                       child: Text(
                                         'Male',
@@ -134,11 +133,9 @@ class BMIState extends State<BMI> {
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(15),
+                                          borderRadius: BorderRadius.circular(15),
                                         ),
-                                        primary:
-                                        !_isMale ? Colors.blue : Colors.grey[300],
+                                        primary: !_isMale ? Colors.blue : Colors.grey[300],
                                       ),
                                       child: Text(
                                         'Female',
@@ -273,13 +270,12 @@ class BMIState extends State<BMI> {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
                                         double bmi = _weight / pow(_height / 100, 2);
-                                        int result = _calculateBMIResult(bmi);
-
+                                        String result = _calculateBMIResult(bmi);
 
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => bmi_result(
+                                            builder: (context) => BmiResult(
                                               age: _age,
                                               isMale: _isMale,
                                               result: result,
@@ -305,15 +301,16 @@ class BMIState extends State<BMI> {
       ),
     );
   }
-  int _calculateBMIResult(double bmi) {
+
+  String _calculateBMIResult(double bmi) {
     if (bmi < 18.5) {
-      return 0; // Underweight
+      return 'Underweight';
     } else if (bmi >= 18.5 && bmi < 25) {
-      return 1; // Normal weight
+      return 'Normal weight';
     } else if (bmi >= 25 && bmi < 30) {
-      return 2; // Overweight
+      return 'Overweight';
     } else {
-      return 3; // Obese
+      return 'Obese';
     }
   }
 }

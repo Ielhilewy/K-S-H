@@ -53,29 +53,28 @@ class GFRState extends State<GFR> {
                                   ),
                                 ],
                               ),
-                                   Row(
-                                     children: [
-                                       Expanded(
-                                        child: Center(
-                                          child: Text(
-                                            'GFR TEST',
-                                            style: TextStyle(
-                                              shadows: [
-                                                Shadow(
-                                                  color: Colors.black,
-                                                  blurRadius: 4.0,
-                                                  offset: Offset(4.0, 4.0),
-                                                ),
-                                              ],
-                                              fontSize: 30,
-                                              color: Colors.white,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'GFR TEST',
+                                        style: TextStyle(
+                                          shadows: [
+                                            Shadow(
+                                              color: Colors.black,
+                                              blurRadius: 4.0,
+                                              offset: Offset(4.0, 4.0),
                                             ),
-                                          ),
+                                          ],
+                                          fontSize: 30,
+                                          color: Colors.white,
                                         ),
+                                      ),
+                                    ),
                                   ),
-                                     ],
-                                   ),
-
+                                ],
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -185,7 +184,7 @@ class GFRState extends State<GFR> {
                                   Expanded(
                                     child: CustomTextField(
                                       labelText: 'Creatinine',
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.phone,
                                       validator: (value) {
                                         if (value?.isEmpty ?? true) {
                                           return 'Please enter the value';
@@ -280,36 +279,35 @@ class GFRState extends State<GFR> {
                               SizedBox(
                                 height: 60,
                                 width: 200,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Colors.blue,
-                                  ),
-                                  child: MaterialButton(
-                                    onPressed: () async {
-                                      if (formKey.currentState!.validate()) {
-                                        formKey.currentState!.save();
-                                        await calculateGFR();
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      formKey.currentState!.save();
+                                      await calculateGFR();
 
-                                        addDocument(gfr);
-                                        getAllData();
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                TableActivity(gfr: gfr),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    height: 50.0,
-                                    child: const Text(
-                                      "CALCULATE",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      addDocument(gfr);
+                                      await getAllData();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              TableActivity(gfr: gfr),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    primary: Colors.blue,
+                                  ),
+                                  child: const Text(
+                                    "CALCULATE",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
@@ -329,22 +327,26 @@ class GFRState extends State<GFR> {
     );
   }
 }
-void addDocument(double gfr){
 
+void addDocument(double gfr) {
   FirebaseAuth auth = FirebaseAuth.instance;
-  String? email = auth.currentUser!.email;
+  String? email = auth.currentUser?.email;
   print("email $email");
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  CollectionReference users =  firestore.collection('users');
-  users.add({
+  CollectionReference users = firestore.collection('users');
+  users
+      .add({
     'email': email!,
     'dangerous': gfr,
-  }).then((DocumentReference document) {
+  })
+      .then((DocumentReference document) {
     print('Document added with ID: ${document.id}');
-  }).catchError((error) {
+  })
+      .catchError((error) {
     print('Error adding document: $error');
   });
 }
+
 Future<List<peoplesData>> getAllData() async {
   // Reference to the Firestore collection
   CollectionReference collection = FirebaseFirestore.instance.collection('users');
@@ -357,19 +359,20 @@ Future<List<peoplesData>> getAllData() async {
     dataList.add(model);
   });
 
-  for (peoplesData pepole in dataList){
-    print("email is ${pepole.email} , dangerus is ${pepole.dangerous}");
+  for (peoplesData people in dataList) {
+    print("email is ${people.email}, dangerous is ${people.dangerous}");
   }
 
   return dataList;
 }
+
 Future<void> calculateGFR() async {
   if (creatinine != null && Weight != null && Age != null) {
     double creatinineValue = double.parse(creatinine!);
     double weight = double.parse(Weight!);
     int age = int.parse(Age!);
     double k = isMale ? 1 : 0.85;
-    gfr = ((140 - age) * weight * k) / (72 * creatinineValue);
+    gfr = ((140 - age) * weight * k) / (72* creatinineValue);
     gfr = double.parse(gfr.toStringAsFixed(2));
   }
 }

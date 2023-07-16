@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:tflite/tflite.dart';
 import 'check_result.dart';
-
-
-var result;
 
 class Checkup extends StatefulWidget {
   @override
@@ -15,61 +13,64 @@ class Checkup extends StatefulWidget {
 }
 
 class _CheckupState extends State<Checkup> {
-  final _formKey = GlobalKey<FormState>(); // add a GlobalKey for the Form widget
+  final _formKey = GlobalKey<FormState>();
   File? _file;
   XFile? _myimage;
   final _picker = ImagePicker();
+  List<dynamic>? _result;
 
-  Future loadModel() async {
+  Future<void> loadModel() async {
     await Tflite.loadModel(
-        model: "assets/hema.tflite",
-        labels: "assets/hema.txt"
+      model: "assets/hema.tflite",
+      labels: "assets/hema.txt",
     );
-
-
   }
 
-
+  @override
   void initState() {
     super.initState();
     loadModel();
-
   }
 
-
-  void model_output(final XFile image)async{
-    result =await Tflite.runModelOnImage(
+  Future<void> modelOutput(final XFile image) async {
+    final List<dynamic>? result = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 3,
       threshold: 0.5,
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    print("results : $result" );
+    setState(() {
+      _result = result;
+    });
+    print("results: $_result");
 
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CheckResult(result: _result),
+      ),
+    );
   }
+
   void pickGalleryImage() async {
     _myimage = await _picker.pickImage(source: ImageSource.gallery);
-    if (_myimage == null) return null;
+    if (_myimage == null) return;
     setState(() {
       _file = File(_myimage!.path);
     });
 
-    print("image : ${_myimage!}");
-    //model_output(_myimage!) ;
+    print("image: $_myimage");
   }
 
   void _submitForm() {
-    model_output(_myimage!);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Check_result(),
-      ),
-    );
-    /*if (_formKey.currentState!.validate()) {
-      // Form is valid, proceed with your logic
-    }*/
+    if (_formKey.currentState!.validate()) {
+      if (_file != null) {
+        modelOutput(_myimage!);
+      } else {
+        // Handle the case when no image is selected
+      }
+    }
   }
 
   @override
@@ -86,7 +87,7 @@ class _CheckupState extends State<Checkup> {
               fit: BoxFit.cover,
             ),
             Form(
-              key: _formKey, // add the GlobalKey to the Form widget
+              key: _formKey,
               child: Column(
                 children: [
                   Padding(

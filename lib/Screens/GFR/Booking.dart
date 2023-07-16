@@ -82,63 +82,61 @@ class _BookingState extends State<Booking> {
                 ),
               ),
               Expanded(
-                child: Container(
-                  child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                    future: FirebaseFirestore.instance
-                        .collection('users')
-                        .orderBy('dangerous', descending: true)
-                        .get(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text('Error: ${snapshot.error}'),
-                        );
-                      }
-                      // Extract the sorted data
-                      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
-                          (snapshot.data as QuerySnapshot<Map<String, dynamic>>).docs;
-                      // Reset the email map
-                      emailMap.clear();
-                      // Update the email map with unique emails and their dangerous values
-                      for (var document in documents) {
-                        String email = document.data()['email'];
-                        double dangerous = document.data()['dangerous'];
-                        emailMap[email] = dangerous;
-                      }
-                      // Sort the email map by value in descending order
-                      List<MapEntry<String, double>> sortedEmails = emailMap.entries.toList();
-                      sortedEmails.sort((a, b) => b.value.compareTo(a.value));
-                      // TODO: Display the data in your UI widgets
-                      return ListView.builder(
-                        itemCount: sortedEmails.length,
-                        itemBuilder: (context, index) {
-                          // Get the email and dangerous value at the specified index
-                          String email = sortedEmails[index].key;
-                          double dangerous = sortedEmails[index].value;
-                          // TODO: Display the data in your UI widgets
-                          return ListTile(
-                            leading: Text(
-                              '${index + 1}',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ), // Display the index number with bold font
-                            title: Text(
-                              email,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Text(
-                              'Dangerous: $dangerous',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          );
-                        },
+                child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .orderBy('dangerous')
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
                       );
-                    },
-                  ),
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    }
+                    // Extract the sorted data
+                    List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
+                        snapshot.data!.docs;
+                    // Reset the email map
+                    emailMap.clear();
+                    // Update the email map with unique emails and their dangerous values
+                    for (var document in documents) {
+                      String email = document.data()['email'];
+                      double dangerous = document.data()['dangerous'] as double; // Convert to double
+                      emailMap[email] = dangerous;
+                    }
+                    // Sort the email map by value in ascending order
+                    List<MapEntry<String, double>> sortedEmails = emailMap.entries.toList();
+                    sortedEmails.sort((a, b) => a.value.compareTo(b.value));
+                    // TODO: Display the data in your UI widgets
+                    return ListView.builder(
+                      itemCount: sortedEmails.length,
+                      itemBuilder: (context, index) {
+                        // Get the email and dangerous value at the specified index
+                        String email = sortedEmails[index].key;
+                        double dangerous = sortedEmails[index].value;
+                        // TODO: Display the data in your UI widgets
+                        return ListTile(
+                          leading: Text(
+                            '${index + 1}',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ), // Display the index number with bold font
+                          title: Text(
+                            email,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            'Dangerous: $dangerous',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],
